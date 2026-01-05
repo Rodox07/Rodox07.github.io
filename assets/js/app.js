@@ -2,32 +2,19 @@ import { renderPosts, renderPostDetail } from "./posts.js";
 import { renderRecords } from "./records.js";
 import { renderVideos } from "./videos.js";
 
-function findMainEl() {
-  // intenta agarrar el "panel principal" como lo tienes en tu layout
-  const sec = document.querySelector("main > section.panel") || document.querySelector("main section") || document.querySelector("main");
-  return sec?.querySelector(".content") || sec;
+function renderAbout({ mainEl, asideEl }) {
+  mainEl.innerHTML = `
+    <h1>Acerca</h1>
+    <div class="lede">Un poco sobre mí.</div>
+    <div class="divider"></div>
+    <div class="postitem">
+      <div class="sub">
+        Aquí va tu texto, links, redes, etc.
+      </div>
+    </div>
+  `;
+  if (asideEl) asideEl.innerHTML = ""; // o deja tu panel de contacto si quieres
 }
-
-function findAsideEl() {
-  const as = document.querySelector("main > aside.panel") || document.querySelector("aside");
-  return as?.querySelector(".content") || as;
-}
-
-function setActiveNav(hash) {
-  document.querySelectorAll(".navlink").forEach(a => a.classList.remove("active"));
-  const map = {
-    "#/": "Inicio",
-    "#/proyectos": "Proyectos",
-    "#/discos": "Discos",
-    "#/videos": "Videos",
-    "#/acerca": "Acerca"
-  };
-  // marca activo por href si existe
-  const active = document.querySelector(`a.navlink[href="${hash.split("?")[0]}"]`);
-  if (active) active.classList.add("active");
-}
-
-const state = { q: "", tag: "" };
 
 async function router() {
   const mainEl = findMainEl();
@@ -43,12 +30,20 @@ async function router() {
       await renderPostDetail({ mainEl, asideEl }, slug);
       return;
     }
+
     if (hash.startsWith("#/discos")) {
       await renderRecords({ mainEl, asideEl });
       return;
     }
+
     if (hash.startsWith("#/videos")) {
       await renderVideos({ mainEl, asideEl });
+      return;
+    }
+
+    // ✅ ACERCA / ABOUT
+    if (hash === "#/acerca" || hash === "#/about") {
+      renderAbout({ mainEl, asideEl });
       return;
     }
 
@@ -64,8 +59,3 @@ async function router() {
     if (asideEl) asideEl.innerHTML = "";
   }
 }
-
-
-
-window.addEventListener("hashchange", router);
-window.addEventListener("DOMContentLoaded", router);
