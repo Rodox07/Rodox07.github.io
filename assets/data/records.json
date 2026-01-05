@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "album": "Is This It",
+      "artista": "The Strokes",
+      "anio": 2001,
+      "genero": "Rock",
+      "cover": "/media/uploads/is-this-it.jpg",
+      "nota": 8,
+      "escuchado": "2026-03-01",
+      "chips": ["Rock alternativo", "Indie rock"],
+      "tags": ["#Rock", "#NYC"],
+      "notas": "Disco fundamental. Buen ritmo y atmósfera."
+    }
+  ]
+}

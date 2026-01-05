@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RodoBlog // Auth</title>
+
+  <!-- (Opcional) tu CSS retro -->
+  <link rel="stylesheet" href="/assets/css/styles.css" />
+
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" defer></script>
+</head>
+<body>
+  <main style="max-width:720px;margin:40px auto;padding:16px;">
+    <h2>Procesando acceso…</h2>
+    <p>Si vienes desde un link de invitación o recovery, esto debería abrir el flujo automáticamente.</p>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
+      <button id="btnLogin" type="button">Abrir login</button>
+      <button id="btnAdmin" type="button">Ir a /admin</button>
+    </div>
+
+    <p style="margin-top:14px;opacity:.7;font-family:monospace;">
+      Tip: si estás reseteando contraseña, la URL suele traer <code>#recovery_token=...</code>
+    </p>
+  </main>
+
+  <script>
+    window.addEventListener("load", () => {
+      const btnLogin = document.getElementById("btnLogin");
+      const btnAdmin = document.getElementById("btnAdmin");
+
+      btnAdmin.addEventListener("click", () => location.href = "/admin/");
+      btnLogin.addEventListener("click", () => window.netlifyIdentity && window.netlifyIdentity.open());
+
+      if (!window.netlifyIdentity) return;
+
+      // Init procesa tokens (invite/recovery/confirm) si vienen en el hash.
+      window.netlifyIdentity.on("login", () => location.href = "/admin/");
+      window.netlifyIdentity.init();
+    });
+  </script>
+</body>
+</html>

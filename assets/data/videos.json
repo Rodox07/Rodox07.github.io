@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "publicado": true,
+      "title": "Clip subido (MP4)",
+      "date": "2026-03-01",
+      "tags": ["#mp4"],
+      "type": "mp4",
+      "src": "/media/videos/clip.mp4",
+      "poster": "/media/posters/clip.jpg",
+      "desc": "Video subido al repo."
+    },
+    {
+      "publicado": true,
+      "title": "Video de YouTube",
+      "date": "2026-03-02",
+      "tags": ["#youtube"],
+      "type": "youtube",
+      "youtube": "gkK36AT7GdE?si=l7Kxlawl7srVf1xF",
+      "start": 0,
+      "poster": "",
+      "desc": "Embed directo desde YouTube."
+    }
+  ]
+}
